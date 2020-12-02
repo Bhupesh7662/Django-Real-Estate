@@ -1,0 +1,132 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+        <!-- Basic Validation -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Edit Property</h2>
+                    </div>
+                    <div class="body">
+                        <form id="form_validation" method="POST" action="" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" value="{{ property_details.title }}"
+                                        name="title" required>
+                                        <input type="hidden" name="realtor_id" value="{{ property_details.realtor.id }}">
+                                    <label class="form-label">Property Title</label>
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" value="{{ property_details.address }}"
+                                        name="address" required>
+                                    <label class="form-label">Property Address</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" value="{{ property_details.city }}"
+                                        name="city" required>
+                                    <label class="form-label">City</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" value="{{ property_details.state }}"
+                                        name="state" required>
+                                    <label class="form-label">state</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="number" class="form-control" value="{{ property_details.zipcode }}"
+                                        name="zipcode" required>
+                                    <label class="form-label">zipcode</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <label class="">Property Description</label>
+                                    <textarea name="description" id="description"
+                                        class="form-control">{{ property_details.description }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="number" class="form-control" value="{{ property_details.price }}"
+                                        name="price" required>
+                                    <label class="form-label">price</label>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="number" class="form-control" value="{{ property_details.rooms }}"
+                                        name="rooms" required>
+                                    <label class="form-label">rooms</label>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="number" class="form-control" value="{{ property_details.bathrooms }}"
+                                        name="bathrooms" required>
+                                    <label class="form-label">bathrooms</label>
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="number" class="form-control" value="{{ property_details.sqft }}"
+                                        name="sqft" required>
+                                    <label class="form-label">Sqft</label>
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="number" class="form-control" value="{{ property_details.plot_size }}"
+                                        name="plot_size" required>
+                                    <label class="form-label">Plot Size</label>
+                                </div>
+                            </div>
+                            <div class="form-group form-float" text-align="pull-right">
+                                <div class="form-line">
+                                    <label class="l">Property image Sub 1</label>
+                                    <input type="file" class="form-control" width=150 height="300"
+                                        name="property_image1" />
+                                    <img src="{{ property.property_image1.url }}" alt="" class="img-fluid">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {% if property_details.is_active == "0" %}
+                                <input type="radio" name="is_active" id="active" class="with-gap" value="0" checked
+                                    required>
+                                <label for="active">Active</label>
+                                <input type="radio" name="is_active" id="inactive" class="with-gap" value="1" required>
+                                <label for="inactive" class="m-l-20">Inactive</label>
+                                {% endif %}
+                            </div>
+
+                            <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+                            <a href="{% url 'add_property' %}" class="btn btn-default waves-effect pull-right"
+                                type="submit">CANCEL</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Basic Validation -->
+
+    </div>
+</section>
+{% endblock %}

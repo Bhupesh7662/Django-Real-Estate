@@ -1,0 +1,232 @@
+{% load static %}
+
+<!Doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Property Selling {% block title %} {% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="#" />
+    <link href="//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Hind&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/style-starter.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}">
+</head>
+
+<body>
+
+    <section class="w3l-top-menu-1">
+        <div class="top-hd">
+            <div class="container">
+                <header class="row">
+                    <div class="social-top col-lg-3 col-6">
+                        <li>Follow Us</li>
+                        <li><a href="#"><span class="fa fa-facebook"></span></a></li>
+                        <li><a href="#"><span class="fa fa-instagram"></span></a> </li>
+                        <li><a href="#"><span class="fa fa-twitter"></span></a></li>
+                        <li><a href="#"><span class="fa fa-vimeo"></span></a> </li>
+                    </div>
+                    <div class="accounts col-lg-9 col-6">
+                        {% if user.is_authenticated %}
+                        <li class="nav-item active mr-3">
+                            <a class="top_li2" href="{% url 'user_dashboard' %}">
+                                Welcome {{ user.username }} (Dashboard)</a>
+                        </li>
+                        <li class="nav-item mr-3">
+                            <a href="javascript:{document.getElementById('logout').submit()}" class="top_li2"></i>
+                                Logout
+                            </a>
+                            <form action="{% url 'logout' %}" method="POST" id="logout">
+                                {% csrf_token %}
+                                <input type="hidden">
+                            </form>
+                        </li>
+                        {% else %}
+                        <li class=""><a href="{% url 'login' %}">Login</a></li>
+                        <li class=""><a href="{% url 'register' %}">Register</a></li>
+                        {% endif %}
+                    </div>
+
+                </header>
+            </div>
+        </div>
+    </section>
+    <section class="w3l-bootstrap-header">
+        <nav class="navbar navbar-expand-lg navbar-light py-lg-2 py-2">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'home'%}"><span class="fa fa-home"></span>Real Estate</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa fa-bars"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'home'%}">Home</a>
+                        </li>
+                        <!-- '''{% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Post Property Ad</a>
+                            </li>
+                        {% endif %}''' -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about'%}">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'services'%}">Services</a>
+                        </li>
+
+                        <li class="nav-item mr-0">
+                            <a class="nav-link" href="{% url 'all_realtors' %}">Relators</a>
+                        </li>
+                        <li class="nav-item mr-0">
+                            <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </section>
+
+    {% block content %}
+
+    {% endblock %}
+    <br>
+    <section class="w3l-footer-29-main" id="footer">
+        <div class="footer-29">
+            <div class="grids-forms-1 pb-5">
+                <div class="container">
+                    <div class="grids-forms">
+                        <div class="main-midd">
+                            <h4 class="title-head">Newsletter – Get Updates & Latest News</h4>
+                        </div>
+                        <div class="main-midd-2">
+                            <form action="#" method="post" class="rightside-form">
+                                <input type="email" name="email" placeholder="Enter your email">
+                                <button class="btn" type="submit">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container pt-5">
+
+                <div class="d-grid grid-col-4 footer-top-29">
+                    <div class="footer-list-29 footer-1">
+                        <h6 class="footer-title-29">About Us</h6>
+                        <ul>
+                            <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae
+                            </p>
+                        </ul>
+                        <div class="main-social-footer-29">
+                            <h6 class="footer-title-29">Social Links</h6>
+                            <a href="#facebook" class="facebook"><span class="fa fa-facebook"></span></a>
+                            <a href="#twitter" class="twitter"><span class="fa fa-twitter"></span></a>
+                            <a href="#instagram" class="instagram"><span class="fa fa-instagram"></span></a>
+                            <a href="#google-plus" class="google-plus"><span class="fa fa-google-plus"></span></a>
+                            <a href="#linkedin" class="linkedin"><span class="fa fa-linkedin"></span></a>
+                        </div>
+                    </div>
+                    <div class="footer-list-29 footer-2">
+                        <ul>
+                            <h6 class="footer-title-29">Useful Links</h6>
+                            <li><a href="{% url 'services' %}">Management</a></li>
+                            <li><a href="{% url 'services' %}">Reporting</a></li>
+                            <li><a href="{% url 'services' %}">Tracking</a></li>
+                            <li><a href="{% url 'services' %}">All Users</a></li>
+                            <li><a href="{% url 'contact' %}">Support</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-list-29 footer-3">
+                        <div class="properties">
+                            <h6 class="footer-title-29">Featured Properties</h6>
+                            <a href="#"><img src="{% static 'assets/images/g7.jpg' %}" class="img-responsive" alt="">
+                                <p>We Are Leading International Consultiing Agency</p>
+                            </a>
+                            <a href="#"><img src="{% static 'assets/images/g8.jpg' %}" class="img-responsive" alt="">
+                                <p>Digital Marketing Agency all the foundational tools</p>
+                            </a>
+                            <a href="#"><img src="{% static 'assets/images/g9.jpg' %}" class="img-responsive" alt="">
+                                <p>Doloremque velit sapien labore eius itna</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="footer-list-29 footer-4">
+                        <ul>
+                            <h6 class="footer-title-29">Quick Links</h6>
+                            <li><a href="{% url 'home' %}">Home</a></li>
+                            <li><a href="{% url 'about' %}l">About</a></li>
+                            <li><a href="{% url 'services' %}">Services</a></li>
+                            <li><a href="{% url 'contact' %}">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- move top -->
+        <button onclick="topFunction()" id="movetop" title="Go to top">
+            <span class="fa fa-angle-up"></span>
+        </button>
+        <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function () {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+        </script>
+        <!-- /move top -->
+    </section>
+
+    <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+    <script>
+        $(function () {
+            $('.navbar-toggler').click(function () {
+                $('body').toggleClass('noscroll');
+            })
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="{% static 'assets/js/lazy_load_script.js' %}"></script>
+
+    <script src="{% static 'assets/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'assets/js/infinite.min.js' %}"></script>
+    <script>
+        var infinite = new Waypoint.Infinite({
+            element: $('.infinite-container')[0],
+            handler: function (direction) {
+
+            },
+            offset: 'bottom-in-view',
+            onBeforePageLoad: function () {
+                $('.spinner-border').show();
+            },
+            onAfterPageLoad: function () {
+                $('.spinner-border').hide();
+            }
+
+
+        });
+    </script>
+</body>
+
+</html>

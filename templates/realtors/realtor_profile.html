@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<div class="container py-2">
+    {% for realtor in realtor_data %}
+    <div class="realtor_profile_image_content  text-center py-2">
+        <img src="{{ realtor.realtor_image.url }}" alt="Relator Profile Image" class="img-fluid" width="70%">
+    </div>
+    <div class="user_name_content py-3">
+        <h3 class="text-center">
+            <p class="realtor_name">{{ realtor.realtor_name }}</p>
+        </h3>
+    </div>
+    {% endfor %}
+    <hr>
+    <br>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-12">
+            {% for realtor in realtor_data %}
+            <div class="realtor_details_content">
+                {% if realtor.is_active == "0" %}
+                <p class="realtor_status py-2">Active</p>
+                {% else %}
+                <p class="realtor_status py-2">Inactive</p>
+                {% endif %}
+                <p class="realtor_phone my-2">{{ realtor.mobile }}</p>
+                <p class="realtor_name my-2">@{{ realtor.realtor_name }}</p>
+                <p class="realtor_email my-2"><a href="mailto:{{ realtor.email }}">{{ realtor.email }}</a></p>
+                <p class="realtor_description my-2">{{ realtor.realtor_description|safe }}</p>
+
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

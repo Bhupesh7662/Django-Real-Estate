@@ -1,0 +1,55 @@
+bedroom_choices = {
+    '1': 1,
+    '2': 2,
+    '3': 3,
+    '4': 4,
+    '5': 5,
+    '6': 6,
+    '7': 7,
+    '8': 8,
+    '9': 9,
+    '10': 10
+}
+
+price_choices = {
+    '50,000': '50,000',
+    '100,000': '100,000',
+    '200,000': '200,000',
+    '300,000': '300,000',
+    '400,000': '400,000',
+    '500,000': '500,000',
+    '600,000': '600,000',
+    '700,000': '700,000',
+    '800,000': '800,000',
+}
+
+
+state_choices = {
+    'AN': 'Andhra Pradesh',
+    'AP': 'Arunachal Pradesh',
+    'AS': 'Assam',
+    'BH': 'Bihar',
+    'CH': 'Chhattisgarh',
+    'GO': 'Goa',
+    'GJ': 'Gujarat',
+    'HR': 'Haryana',
+    'HP': 'Himachal Pradesh',
+    'JK': 'Jammu & Kashmir',
+    'JH': 'Jharkhand',
+    'KT': 'Karnataka',
+    'KR': 'Kerala',
+    'MH': 'Maharashtra',
+    'MN': 'Manipur',
+    'MG': 'Meghalaya',
+    'MI': 'Mizoram',
+    'NG': 'Nagaland',
+    'OD': 'Odisha',
+    'PN': 'Punjab',
+    'RJ': 'Rajasthan',
+    'SK': 'Sikkim',
+    'TN': 'Tamil Nadu ',
+    'TP': 'Tripura',
+    'UK': 'Uttarkhand',
+    'UP': 'Uttar Pradesh',
+    'WB': 'West Bengal',
+}

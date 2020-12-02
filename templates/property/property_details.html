@@ -1,0 +1,251 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load humanize %}
+
+{% block content %}
+
+<section id="bc" class="mt-3">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    <a href="{% url 'view_more' %}">Property</a>
+                </li>
+                {% for property in property_data %}
+                <li class="breadcrumb-item active">
+                    {{ property.title }}
+                </li>
+                {% endfor %}
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<section class="blog_details-long">
+    <div class="container">
+        {% include 'partials/_alerts.html' %}
+        <div class="row">
+            <div class="col-md-8 col-sm-12 col-12">
+                {% for property in property_data %}
+                <div class="big_post mt-4">
+                    <h5>{{ property.title }}</h5>
+                    <span class="d-block mt-2">By : <a href="/realtor_profile/{{ property.realtor.realtor_slug }}"
+                            class="realtor_link">{{ property.realtor.realtor_name }} </a>-
+                        {{ property.datepublished }}</span><br>
+                    <div class="img_content">
+                        <img src="{{ property.property_image_main.url }}" alt="Property Main Image"
+                            class="img-fluid property_image_main" style="width:100%">
+                    </div>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active">
+                            <div class="row">
+                                {% if property.property_image1 %}
+                                <div class="col-sm-3 col-12">
+                                    <a href="#{{ property.property_image1.url }}">
+                                        <div class="image_content my-2">
+                                            <img src="{{ property.property_image1.url }}" alt="Property sub Image"
+                                                class="img-fluid property_image_sub">
+                                        </div>
+                                    </a>
+                                    <a href="#_" class="lightbox" id="{{ property.property_image1.url }}">
+                                        <img src="{{ property.property_image1.url }}" alt="Property sub Image"
+                                            class="img-fluid property_image_sub">
+                                    </a>
+                                </div>
+                                {% endif %}
+
+                                {% if property.property_image2 %}
+                                <div class="col-sm-3 col-12">
+                                    <a href="#{{ property.property_image2.url }}">
+                                        <div class="image_content my-2">
+                                            <img src="{{ property.property_image2.url }}" alt="Property sub Image"
+                                                class="img-fluid property_image_sub">
+                                        </div>
+                                    </a>
+                                    <a href="#_" class="lightbox" id="{{ property.property_image2.url }}">
+                                        <img src="{{ property.property_image2.url }}" alt="Property sub Image"
+                                            class="img-fluid property_image_sub">
+                                    </a>
+                                </div>
+                                {% endif %}
+
+                                {% if property.property_image3 %}
+                                <div class="col-sm-3 col-12">
+                                    <a href="#{{ property.property_image3.url }}">
+                                        <div class="image_content my-2">
+                                            <img src="{{ property.property_image3.url }}" alt="Property sub Image"
+                                                class="img-fluid property_image_sub">
+                                        </div>
+                                    </a>
+                                    <a href="#_" class="lightbox" id="{{ property.property_image3.url }}">
+                                        <img src="{{ property.property_image3.url }}" alt="Property sub Image"
+                                            class="img-fluid property_image_sub">
+                                    </a>
+                                </div>
+                                {% endif%}
+                                {% if property.property_image4 %}
+                                <div class="col-sm-3 col-12">
+                                    <a href="#{{ property.property_image4.url }}">
+                                        <div class="image_content my-2">
+                                            <img src="{{ property.property_image4.url }}" alt="Property sub Image"
+                                                class="img-fluid property_image_sub">
+                                        </div>
+                                    </a>
+                                    <a href="#_" class="lightbox" id="{{ property.property_image4.url }}">
+                                        <img src="{{ property.property_image4.url }}" alt="Property sub Image"
+                                            class="img-fluid property_image_sub">
+                                    </a>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <hr>
+                    <div class="row py-2 text-secondary">
+                        <div class="col-6">
+                            <i class="fa fa-th-large"></i> Sqft: {{ property.sqft }}
+                        </div>
+                        <div class="col-6">
+                            &#8377; {{ property.price | intcomma }}
+                        </div>
+                    </div>
+                    <div class="row py-2 text-secondary">
+                        <div class="col-6">
+                            <i class="fa fa-bed"></i> Rooms: {{ property.rooms }}</div>
+                        <div class="col-6">
+                            <i class="fa fa-bath"></i> Bathrooms: {{ property.bathrooms }}</div>
+                    </div>
+
+                    <div class="row py-2 text-secondary">
+                        <div class="col-6">
+                            <i class="fa fa-location-arrow"></i> City: {{ property.city }}</div>
+                        <div class="col-6">
+                            <i class="fa fa-location-arrow"></i> State: {{ property.state }}</div>
+                    </div>
+
+                    <div class="row py-2 text-secondary">
+                        <div class="col-6">
+                            <i class="fa fa-table"></i> Date: {{ property.created_date | timesince }} ago
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="full_description">
+                        <div>{{ property.description|safe }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+                <div class="card_content">
+                    {% for realtor in property_data %}
+                    <div class="card mt-4 card_realtor">
+                        <img class="card-img-top" src="{{ realtor.realtor.realtor_image.url }}" alt="Realtor Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ realtor.realtor.realtor_name }}</h5>
+                            <p class="card-text">{{ realtor.realtor.realtor_description|truncatechars:200|safe }}</p>
+                            <div class="text-right mt-1">
+                                <a href="/realtor_profile/{{ realtor.realtor.realtor_slug }}"
+                                    class="btn btn-theme3 w-100">View Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <br>
+                <div class="text-right">
+                    <button type="submit" class="btn btn-theme3 w-100" data-toggle="modal"
+                        data-target="#exampleModal">Make Inquiry</button>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Get Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="inquiry_form_content">
+                                    {% for property in property_data %}
+                                    <form action="{% url 'make_inquiry' %}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" value="{{ property.title }}"
+                                                name="property_detail">
+                                        </div>
+                                        {% if user.is_authenticated %}
+                                        <input type="hidden" name="user_id" value="{{ user.id }}">
+                                        <div class="form-group">
+                                            <label for="inquiry_name">Name</label>
+                                            <input type="text" class="form-control" id="inquiry_name"
+                                                name="inquiry_name" placeholder="Enter Name" required minlength="3"
+                                                value="{{user.first_name }} {{ user.last_name }}">
+                                            <input type="hidden" name="slug" value="{{ property.property_slug }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inquiry_email">Email</label>
+                                            <input type="email" class="form-control" id="inquiry_email"
+                                                name="inquiry_email" placeholder="Enter email" required
+                                                value="{{ user.email }}">
+                                            <small id="emailHelp" class="form-text text-muted">We'll never share your
+                                                email with anyone
+                                                else.</small>
+                                        </div>
+                                        {% else %}
+                                        <input type="hidden" name="user_id" value="0">
+                                        <div class="form-group">
+                                            <label for="inquiry_name">Name</label>
+                                            <input type="text" class="form-control" id="inquiry_name"
+                                                name="inquiry_name" placeholder="Enter Name" required minlength="3">
+                                            <input type="hidden" name="slug" value="{{ property.property_slug }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inquiry_email">Email</label>
+                                            <input type="email" class="form-control" id="inquiry_email"
+                                                name="inquiry_email" placeholder="Enter email" required>
+                                            <small id="emailHelp" class="form-text text-muted">We'll never share your
+                                                email with anyone
+                                                else.</small>
+                                        </div>
+                                        {% endif %}
+                                        <input type="hidden" name="realtor_email" value="{{ property.realtor.email }}">
+                                        <input type="hidden" name="realtor_mobile" value="{{ property.realtor.mobile }}">
+                                        <input type="hidden" name="property_id" value="{{ property.id }}">
+                                        <input type="hidden" name="property_image" value="{{ property.property_image_main.url }}">
+                                        <div class="form-group">
+                                            <label for="inquiry_phone">Phone Number</label>
+                                            <input type="text" class="form-control" id="inquiry_phone_number"
+                                                name="inquiry_phone_number" placeholder="Phone Number" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inquiry_message">Message</label>
+                                            <textarea class="form-control w-100" id="inquiry_message"
+                                                name="inquiry_message" rows="3"></textarea>
+                                        </div>
+                                        <div class="text-right">
+                                            <button type="submit" class="btn btn-theme3 w-100" data-toggle="modal"
+                                                data-target="#exampleModal">Submit</button>
+                                        </div>
+                                    </form>
+                                    {% endfor%}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br><br>
+
+{% endblock %}

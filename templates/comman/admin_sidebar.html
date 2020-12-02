@@ -1,0 +1,98 @@
+{% load static %}
+{% if request.user.is_authenticated and request.user.is_superuser %}
+<section>
+    <!-- Left Sidebar -->
+    <aside id="leftsidebar" class="sidebar">
+        <!-- User Info -->
+        <div class="user-info">
+            <div class="image">
+                <img src="{% static 'backend/' %}images/user.png" width="48" height="48" alt="User" />
+            </div>
+            <div class="info-container">
+                <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {% if user.first_name and user.last_name %}
+                        {{ user.first_name }} {{ user.last_name }}
+                    {% else %}
+                        {{ user.username }}
+                    {% endif %}
+                </div>
+                <div class="email">{{ user.email }}</div>
+            </div>
+        </div>
+        <!-- #User Info -->
+        <!-- Menu -->
+        <div class="menu">
+            <ul class="list">
+                <li class="header">MAIN NAVIGATION</li>
+                <li>
+                    <a href="{% url 'dashboard' %}">
+                        <i class="material-icons">home</i>
+                        <span>Home</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">face</i>
+                        <span>Realtors</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li class="">
+                            <a href="{% url 'manage_realtors' %}">Manage Realtors</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'add_realtors' %}">Add New Realtor</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">add_location_alt</i>
+                        <span>Property</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li class="">
+                            <a href="{% url 'manage_property' %}">Manage Property</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'add_property' %}">Add New Property</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">notifications_active</i>
+                        <span>Property Inquiries</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li class="">
+                            <a href="{% url 'inquiry' %}">Manage Inquiries</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">message</i>
+                        <span>User Feedbacks</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li class="">
+                            <a href="{% url 'feedback' %}">Manage Feedback</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- #Menu -->
+        <!-- Footer -->
+        <div class="legal">
+            <div class="copyright">
+                &copy; 2020 <a href="javascript:void(0);">Bhupesh Pathak</a>.
+            </div>
+
+        </div>
+        <!-- #Footer -->
+    </aside>
+    <!-- #END# Left Sidebar -->
+</section>
+{% endif %}

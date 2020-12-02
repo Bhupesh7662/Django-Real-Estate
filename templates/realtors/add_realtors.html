@@ -1,0 +1,77 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+        <!-- Basic Validation -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Add Realtors</h2>
+                    </div>
+                    <!-- Message Alerts -->
+                    {% include 'partials/_alerts.html' %}
+                    <div class="body">
+                        <form id="form_validation" method="POST" action="{% url 'add_realtors' %}"
+                            enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" name="username" id="username" required>
+                                    <label class="form-label">Username</label>
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" name="realtor_name" id="realtor_name"
+                                        required>
+                                    <label class="form-label">Realtor Name</label>
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="email" class="form-control" name="email" id="email" required>
+                                    <label class="form-label">Realtor Email</label>
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <label class="">Realtor Description</label>
+                                    <textarea name="realtor_description" id="description"
+                                        class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group form-float" text-align="pull-right">
+                                <div class="form-line">
+                                    <label class="form-label">Realtor Image</label>
+                                    <input type="file" class="form-control" width=150 height="300" name="realtor_image"
+                                        id="realtor_image" required />
+                                    <img id="realtor_image" src="#" alt="" class="img-fluid" />
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="number" class="form-control" name="mobile" id="mobile" required>
+                                    <label class="form-label">Realtor Mobile No.</label>
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" name="created_by" id="created_by" required>
+                                    <label class="form-label">Created By</label>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+                            <a href="{% url 'add_realtors' %}" class="btn btn-default waves-effect pull-right"
+                                type="submit">CANCEL</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Basic Validation -->
+    </div>
+</section>
+{% endblock %}

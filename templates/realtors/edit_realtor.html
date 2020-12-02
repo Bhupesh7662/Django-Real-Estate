@@ -1,0 +1,72 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+        <!-- Basic Validation -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Edit Realtors</h2>
+                    </div>
+                    <div class="body">
+                        <form id="form_validation" method="POST" action="" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" value="{{ realtors.realtor_name }}"
+                                        name="realtor_name" required>
+                                    <label class="form-label">Realtor Name</label>
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" value="{{ realtors.email }}" name="email"
+                                        required>
+                                    <label class="form-label">Realtor Email</label>
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <textarea name="realtor_description" id="description"
+                                        class="form-control">{{ realtors.realtor_description }}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group form-float" text-align="pull-right">
+                                <div class="form-line">
+                                    <label class="form-label">Realtor Image</label>
+                                    <input type="file" class="form-control" name="realtor_image"
+                                        value="{{ realtors.realtor_image.url }}" />
+                                        {{ realtors.realtor_image.url }}
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" value="{{ realtors.mobile }}" name="mobile">
+                                    <label class="form-label">Realtor Mobile No. </label>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" value="{{ realtors.created_by }}"
+                                        name="created_by">
+                                    <label class="form-label">Realtor Created By</label>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+                            <a href="{% url 'add_realtors' %}" class="btn btn-default waves-effect pull-right"
+                                type="submit">CANCEL</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Basic Validation -->
+
+    </div>
+</section>
+{% endblock %}

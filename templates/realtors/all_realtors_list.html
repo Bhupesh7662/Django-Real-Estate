@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %} | All Realtors {% endblock %}
+
+
+{% block content %}
+<section class="all_realtors">
+    <div class="container">
+        <div class="row">
+            {% for realtor in realtor_data %}
+            <div class="col-md-3 col-sm-3 col-12">
+                <div class="card_content">
+                    <div class="card mt-4 card_realtor">
+                        <img class="card-img-top" src="{{ realtor.realtor_image.url }}" alt="Realtor Image">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">{{ realtor.realtor_name }}</h5>
+                            <p class="card-text">{{ realtor.realtor_description|safe }}</p>
+                            <div class="text-right mt-1">
+                                <a href="/realtor_profile/{{ realtor.realtor_slug }}"
+                                    class="btn btn-theme3 w-100">View
+                                    Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<br>
+
+{% endblock %}

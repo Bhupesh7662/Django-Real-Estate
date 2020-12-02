@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} | User Dashboard {% endblock %}
+
+{% load humanize %}
+
+{% block content %}
+
+<section id="showcase-inner" class="py-5">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12 mt-5">
+        <h1 class="display-4">Welcome {{ user.first_name }} {{ user.last_name }}</h1>
+        <p class="lead">Manage your Real Estate account</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item active"> Dashboard</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- Alerts -->
+{% include 'partials/_alerts.html' %}
+
+<section id="dashboard" class="py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Welcome {{ user.first_name }} {{ user.last_name }}</h2>
+
+        <p>Here are the properties that you have inquired about</p>
+        <br>
+        {% if inquiries %}
+
+        <!-- <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Serial No.</th>
+              <th scope="col">Proprty Image</th>
+              <th scope="col">Property Title</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for inquiry in inquiries %}
+            <tr>
+              <td> {{ forloop.counter }}</td>
+              <td width="50%"><img src="{{ inquiry.property_image }}" alt="Inquiry Image" class="img-fluid"></td>
+              <td>{{ inquiry.property_detail }}</td>
+              <td>
+                <a href="/accounts/delete_user_inquiry/{{ inquiry.id }}" class="btn btn-danger">Delete</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table> -->
+        <br>
+        {% for inquiry in inquiries %}
+        <div class="col-md-3 col-sm-3 col-12">
+          <div class="inquiries_content">
+            <div class="card">
+              <img src="{{ inquiry.property_image }}" class="card-img-top" alt="Inquiry Image">
+              <div class="card-body">
+                <h5 class="card-title">{{ inquiry.property_detail }}</h5>
+                <a href="/accounts/delete_user_inquiry/{{ inquiry.id }}" class="btn btn-danger">Delete Inquiry</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+
+
+        {% else %}
+        <div class="col-md-12 col-12">
+          <p class="font-weight-bold">You have not made any inquiry for any property</p>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+</section>
+{% endblock %}

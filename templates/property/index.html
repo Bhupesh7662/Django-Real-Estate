@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<!-- Section 1 -->
+<section class="form-12" id="home">
+  <div class="form-12-content">
+    <div class="container">
+      <div class="grid grid-column-2 ">
+        <div class="column2">
+        </div>
+        <div class="column1">
+          {% csrf_token %}
+          <form action="{% url 'search' %}" method="GET">
+            <div class="blog-search form d-flex search-form">
+              <input type="search" class="form-control w-100" placeholder="Keyword (Pool, Garage, etc)"
+                name="keywords">
+            </div>
+
+            <div class="blog-search form d-flex search-form">
+              <input type="search" class="form-control w-100 pt-1 mt-2" placeholder="City" name="city">
+            </div>
+
+            <div class="w-100">
+              <select name="rooms" id="sel2">
+                <option value="">All rooms</option>
+                {% for key,value in bedroom_choices.items %}
+                <option value="{{ key }}">{{ value }}</option>
+                {% endfor %}
+              </select>
+
+            </div>
+
+            <div class="w-100">
+              <select name="state" id="sel4">
+                <option value="">State</option>
+                {% for key,value in state_choices.items %}
+                <option value="{{ value }}">{{ value }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="w-100">
+              <select name="price" id="sel6">
+                <option value="">Pricing(All)</option>
+                {% for key,value in price_choices.items %}
+                <option value="{{ value }}">&#8377; {{ value }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <button type="submit" class="btn">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- //Section 1 -->
+<!-- Section 2 -->
+<section class="locations-1" id="locations">
+  <div class="locations py-5">
+    <div class="container py-md-3">
+      <div class="heading text-center mx-auto">
+        <h3 class="head">Popular Locations</h3>
+        <p class="my-3 head "> Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+          Nulla mollis dapibus nunc, ut rhoncus
+          turpis sodales quis. Integer sit amet mattis quam.</p>
+      </div>
+      <div class="row mt-3 pt-5">
+        {% if property_details %}
+        {% for property in property_details %}
+        <div class="col-md-4 col-sm-6 my-3">
+          <div class="box16">
+            <img src="{{ property.property_image_main.url }}" width="100%" alt="Property Popular image"
+              class="img-fluid">
+            <div class="box-content">
+              <h3 class="title">{{ property.title }}</h3>
+              <span class="post">Rooms: {{ property.rooms }}</span>
+              <span class="post">{{ property.created_date|timesince }} ago</span>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="container">
+          <div class="text-center">
+            <p>No Properties Available</p>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+<!-- //Section 2 -->
+<!-- Section 3 -->
+<section class="grids-4" id="properties">
+  <div id="grids4-block" class="py-5">
+    <div class="container py-md-3">
+      <div class="heading text-center mx-auto">
+        <h3 class="head">Properties For sale</h3>
+        <p class="my-3 head"> Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+          Nulla mollis dapibus nunc, ut rhoncus
+          turpis sodales quis. Integer sit amet mattis quam.</p>
+      </div>
+      <div class="row mt-5 pt-3">
+        {% if property_details %}
+        {% for property in property_details %}
+        <div class="grids4-info col-lg-4 col-md-6 my-3">
+          <a href="property_details/{{ property.property_slug }}">
+            <img src="{{ property.property_image_main.url }}" class="img-fluid" alt="Propert Image">
+            <ul class="location-top">
+              <li class="rent">For Rent</li>
+              <li class="open-1">Open House</li>
+            </ul>
+            <div class="info-bg">
+              <h5>{{ property.title }}</h5>
+              <p>&#8377; {{ property.price | intcomma }}</p>
+              <p>{{ property.created_date|timesince }} ago</p>
+              <ul>
+                <li><span class="fa fa-home"></span>Rooms: {{ property.rooms }}</li>
+                <li><span class="fa fa-bath"></span>Bedrooms: {{ property.bedrooms }}</li>
+                <li><span class="fa fa-share-square-o"></span>{{ property.sqft }} Sqft</li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+        <div class="container">
+          <div class="text-center">
+            <a href="{% url 'view_more' %}" type="submit" class="btn btn-theme3">View More</a>
+          </div>
+        </div>
+        {% else %}
+        <div class="container">
+          <div class="text-center">
+            <p>No Properties Available</p>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section 3 -->
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="user_property_post_content py-4">
+    <section class="">
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 content">
+                    <div class="header text-center my-3">
+                        <h2>Add Property</h2>
+                    </div>
+
+                    <form method="POST" action="{% url 'user_property_add' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label class="form-label">Property Title</label>
+                                <input type="text" class="form-control" name="title" id="title" required>
+                                <input type="hidden" name="user_id", value="{{ user.id }}">
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label class="form-label">Property Address</label>
+                                <textarea name="address" id="address" cols="100%" rows="10" class="img-fluid" maxlength="500"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label class="form-label">City</label>
+                                <input type="text" class="form-control" name="city" id="city" required>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label class="form-label">State</label>
+                                <input type="text" class="form-control" name="state" id="state" required>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label class="form-label">Zipcode</label>
+                                <input type="text" class="form-control" name="zipcode" id="zipcode" required>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label class="">Property Description</label>
+                                <textarea name="description" cols="100%" rows="10" class="img-fluid"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label class="form-label">Price</label>
+                                <input type="number" class="form-control" name="price" id="price" required>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label class="form-label">Rooms</label>
+                                <input type="number" class="form-control" name="rooms" id="rooms" required>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label class="form-label">Bedrooms</label>
+                                <input type="number" class="form-control" name="bedrooms" id="bedrooms" required>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label class="form-label">Property Sqft</label>
+                                <input type="number" class="form-control" name="sqft" id="sqft" required>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label class="form-label">Plot Size</label>
+                                <input type="number" class="form-control" name="plot_size" id="plot_size" required>
+                            </div>
+                        </div>
+                        <div class="form-group form-float" text-align="pull-right">
+                            <div class="form-line">
+                                <label class="">Property Main image</label>
+                                <input type="file" class="form-control" width=150 height="300"
+                                    name="property_image_main" required />
+                                <img id="blah" src="#" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="form-group form-float" text-align="pull-right">
+                            <div class="form-line">
+                                <label class="l">Property image Sub 1</label>
+                                <input type="file" class="form-control" width=150 height="300" name="property_image1" />
+                                <img id="blah" src="#" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="form-group form-float" text-align="pull-right">
+                            <div class="form-line">
+                                <label class="l">Property image Sub 2</label>
+                                <input type="file" class="form-control" width=150 height="300" name="property_image2" />
+                                <img id="blah" src="#" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="form-group form-float" text-align="pull-right">
+                            <div class="form-line">
+                                <label class="l">Property image Sub 3</label>
+                                <input type="file" class="form-control" width=150 height="300" name="property_image3" />
+                                <img id="blah" src="#" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="form-group form-float" text-align="pull-right">
+                            <div class="form-line">
+                                <label class="l">Property image Sub 4</label>
+                                <input type="file" class="form-control" width=150 height="300" name="property_image4" />
+                                <img id="blah" src="#" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="btn_content mb-2">
+                            <button class="btn btn-secondary" type="submit">SUBMIT</button>
+                            <a href="{% url 'user_property_add' %}" class="btn btn-warning pull-right"
+                                type="submit">CANCEL</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+{% endblock %}
