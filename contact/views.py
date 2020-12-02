@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.mail import send_mail
-# from twilio.rest import Client
 from django.http import HttpResponse
 from .models import Contact, Inquiry
 from realtors.models import Realtors
@@ -78,8 +77,8 @@ def make_inquiry(request):
             'Property Inquiry: ' + property_detail,
             realtor_mail + ', Contact details of inquiry user:  ' +
             inquiry_name + ' ' + inquiry_phone_number,
-            'bpathak277@gmail.com',
-            [realtor_email, 'bpathak277@gmail.com'],
+            'yourmail@gmail.com',
+            [realtor_email, 'yourmail@gmail.com'],
             fail_silently=False
         )
         # To Inquiry Customer
@@ -88,33 +87,11 @@ def make_inquiry(request):
             'Property Inquiry: ' + property_detail,
             user_mail + ' ' + property_detail + '. Realtor will get back to you soon' +
             ' or contact reatil: Contact details of realtor: ' + realtor_mobile,
-            'bpathak277@gmail.com',
-            [inquiry_email, 'bpathak277@gmail.com'],
+            'yourmail@gmail.com',
+            [inquiry_email, 'yourmail@gmail.com'],
             fail_silently=False
         )
 
-        # # Twilio Sending SMS
-        # account_sid = 'AC0a94bb3ca0ead081e91e351291809699'
-        # auth_token = 'd182d60b68b14ec773770b05b0f9a3e8'
-        # client = Client(account_sid, auth_token)
-
-        # # Twilio Sending SMS to Customers
-        # message = client.messages \
-        #                 .create(
-        #                     body=user_mail + property_detail + '. Realtor will get back to you soon' +
-        #                     '                             or contact reatil: Contact details of realtor: ' + realtor_mobile,
-        #                     from_='+12056971095',
-        #                     to='+91'+inquiry_phone_number
-        #                 )
-
-        # # Twilio Sending SMS to Customers
-        # message = client.messages \
-        #                 .create(
-        #                     body=realtor_mail + property_detail + ', Contact details of inquiry user: ' +
-        #                     'inquiry_name ' + ' : ' + inquiry_phone_number,
-        #                     from_='+12056971095',
-        #                     to='+91'+inquiry_phone_number
-        #                 )
 
         messages.success(
             request, "Your inquiry has been submitted successfully, Realtor will get back to you soon")
